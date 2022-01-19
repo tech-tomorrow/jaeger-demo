@@ -17,5 +17,3 @@ You can then navigate to http://localhost:16686 to access the Jaeger UI.
 
 ### Run
 $go run main.go
-
-

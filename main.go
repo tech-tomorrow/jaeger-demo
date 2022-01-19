@@ -63,7 +63,7 @@ func sub(ctx context.Context) {
 
 	// Call service2
 	fmt.Printf("%016x\n", span.SpanContext().TraceID)
-	fmt.Printf("%016x", span.SpanContext().SpanID)
+	fmt.Printf("%016x\n", span.SpanContext().SpanID)
 	service(fmt.Sprintf("%016x", span.SpanContext().TraceID), fmt.Sprintf("%016x", span.SpanContext().SpanID))
 }
 
@@ -83,6 +83,10 @@ func service(traceID string, spanID string) {
 	}
 	_, span := tr.Start(trace.ContextWithRemoteSpanContext(ctx, sc), "service-span1")
 	span.End()
+
+	fmt.Printf("%016x\n", span.SpanContext().TraceID)
+	fmt.Printf("%016x\n", span.SpanContext().SpanID)
+
 	service2(fmt.Sprintf("%016x", span.SpanContext().TraceID), fmt.Sprintf("%016x", span.SpanContext().SpanID))
 }
 
@@ -102,4 +106,6 @@ func service2(traceID string, spanID string) {
 	}
 	_, span := tr.Start(trace.ContextWithRemoteSpanContext(ctx, sc), "service2-span1")
 	span.End()
+	fmt.Printf("%016x\n", span.SpanContext().TraceID)
+	fmt.Printf("%016x\n", span.SpanContext().SpanID)
 }
